@@ -45,8 +45,6 @@ try:
         source_cursor = source_conn.cursor()
         dest_cursor = dest_conn.cursor()
 
-        # delete - one at a time views constraint
-        # truncate - data space reclaim gardaina
         with open("../../sql/extract_raw_data_timesheet.sql") as file:
             sql = "".join(file.readlines())
             source_cursor.execute(sql)
