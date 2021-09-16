@@ -1,4 +1,5 @@
 #Sales data documentation
+
 **1. The data given in the .sql file is used to create tables, establish relationships and insert data into the tables**
 The 5 tables include:
    * Users
