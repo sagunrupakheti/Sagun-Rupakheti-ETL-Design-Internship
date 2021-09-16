@@ -24,16 +24,14 @@ try:
     #     cursor.execute(create_query)
     #     conn.commit()
 
-    def extract_db_data():
+    def extract_db_data(filename):
         source_conn = connect()
         dest_conn = connect()
 
         source_cursor = source_conn.cursor()
         dest_cursor = dest_conn.cursor()
 
-        #delete - one at a time views constraint
-        #truncate - data space reclaim gardaina
-        with open("../../sql/extract_raw_data_scenario.sql") as file:
+        with open() as file:
             sql = "".join(file.readlines())
             source_cursor.execute(sql)
             result = source_cursor.fetchall()
@@ -46,6 +44,6 @@ try:
 
     if __name__ == "__main__":
         #create_table_for_extraction()
-        extract_db_data()
+        extract_db_data("../../sql/extract_raw_data_scenario.sql")
 except Exception as e:
     print(e)
