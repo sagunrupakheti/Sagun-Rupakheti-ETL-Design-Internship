@@ -1,4 +1,5 @@
 #Copy of Existing Pipeline 
+
 **1. Query the table for extraction**    
 ~~~python 
 SELECT 
