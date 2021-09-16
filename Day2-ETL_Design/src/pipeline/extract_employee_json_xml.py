@@ -4,15 +4,18 @@ from lxml import etree
 import psycopg2
 from psycopg2.extras import execute_values
 import datetime
+from dotenv import load_dotenv
+load_dotenv()
+import os
 
 try:
     #establish connection
     connection = psycopg2.connect(
-        host="localhost",
-        database="ETLweek1",
-        user="postgres",
-        password="sagun",
-        port=5432
+        user=os.getenv("user"),
+        password=os.getenv("password"),
+        host=os.getenv("host"),
+        port=os.getenv("port"),
+        database=os.getenv("database1")
     )
     cursor = connection.cursor()
 
@@ -70,16 +73,16 @@ try:
         except Exception as e:
             print(e)
 
-    def insert_table_raw_employee_xml(filename):
-        filename = '../../data/employee_2021_08_01.xml'
+    def insert_table_raw_employee_xml(file):
+        filename = file
         start_date = datetime.datetime.now()
         insert_command = "INSERT INTO raw_employee (employee_id, first_name, last_name, department_id, department_name, manager_employee_id, employee_role, salary, hire_date, terminated_date, terminated_reason, dob, fte, location)VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);"
         import_xml(filename, connection, insert_command)
 
 
     if __name__ == "__main__":
-        insert_table_raw_employee_json('../../data/employee_2021_08_01.json')
-        insert_table_raw_employee_xml('../../data/employee_2021_08_01.xml')
+        insert_table_raw_employee_json('../../data/employee_2021_08_01.xml')
+        #insert_table_raw_employee_xml('../../data/employee_2021_08_01.xml')
 
     connection.commit()
     cursor.close()

@@ -1,11 +1,17 @@
+#imports
 import psycopg2
+from dotenv import load_dotenv
+load_dotenv()
+import os
+
 try:
+    #establish connection
     connection = psycopg2.connect(
-        host="localhost",
-        database="ETLweek1",
-        user="postgres",
-        password="sagun",
-        port=5432
+        user=os.getenv("user"),
+        password=os.getenv("password"),
+        host=os.getenv("host"),
+        port=os.getenv("port"),
+        database=os.getenv("database1")
     )
     cursor = connection.cursor()
 
